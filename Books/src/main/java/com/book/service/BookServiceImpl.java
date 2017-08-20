@@ -56,15 +56,18 @@ public class BookServiceImpl implements BookService{
 		bookRepository.findByStatus(new Status(status)).forEach(books::add);
 		return books;
 	}
+
+	@Override
+	public Integer countByStatus(String status) {
+		Status status1 = new Status(status);
+		return bookRepository.countByStatus(status1);
+	}
+
+	@Override
+	public Long count() {
+		return bookRepository.count();
+	}
 	
 
-
-//	@Override
-//	public List<Book> findBooksByAuthorName(String authorName) {
-//		List<Book> books = new ArrayList<>();
-//		bookRepository.findBooksByName(authorName).forEach(books::add);
-//		return books;
-//		
-//	}
 	
 }

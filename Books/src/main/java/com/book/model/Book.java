@@ -10,6 +10,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name="Book")
 public class Book {
@@ -30,33 +33,62 @@ public class Book {
 	@NotNull
 	private Status status;
 	
+	@NotNull
+	private Description description;
+	
+	@NotNull
+	private Pages pages;
+	
+	
+	
 	public Book(){
 		
 	}
-	public Book(long isbn, String authorName, String title, Type type,Status status) {
+	public Book(long isbn, String authorName, String title, Type type,Status status,Description description,Pages pages) {
 		super();
 		this.isbn = isbn;
-		this.name = new Author(authorName);
+		this.name.setName(authorName);
 		this.title = title;
 		this.type = type;
 		this.status = status;
+		this.description = description;
+		this.pages = pages;
 	}
 	
+	
+	
+
+	public Description getDescription() {
+		return description;
+	}
+
+	public void setDescription(Description description) {
+		this.description = description;
+	}
+
+	public Pages getPages() {
+		return pages;
+	}
+
+	public void setPages(Pages pages) {
+		this.pages = pages;
+	}
+
 	public long getIsbn() {
 		return isbn;
 	}
+
 	public void setIsbn(long isbn) {
 		this.isbn = isbn;
 	}
 
-	
 
 	public Author getAuthorName() {
 		return name;
 	}
 
 
-	public void setAuthorId(Author authorName) {
+	public void setAuthorName(Author authorName) {
 		this.name = authorName;
 	}
 

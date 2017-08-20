@@ -2,13 +2,14 @@ package com.book.controller;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
+
 
 import com.book.model.Author;
 import com.book.service.AuthorService;
@@ -22,12 +23,8 @@ public class AuthorController {
 	private AuthorService authorService = new AuthorServiceImpl();
 	
 	@RequestMapping(value ="/add" ,method = RequestMethod.POST)
-	public ModelAndView addAuthor(@RequestBody Author author){
-		ModelAndView modelAndView = new ModelAndView("add_author");
+	public void addAuthor(@RequestBody Author author){
 		authorService.addAuthor(author);
-		String message = "Successfully added";
-		modelAndView.addObject("add",message);
-		return modelAndView;
 		
 	}
 	@RequestMapping(value = "/getAll")
