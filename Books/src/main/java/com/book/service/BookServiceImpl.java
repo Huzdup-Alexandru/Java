@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.book.model.Book;
+import com.book.model.Category;
 import com.book.model.Status;
 import com.book.repository.BookRepository;
 
@@ -66,6 +67,13 @@ public class BookServiceImpl implements BookService{
 	@Override
 	public Long count() {
 		return bookRepository.count();
+	}
+
+	@Override
+	public List<Book> findByCategory(String category) {
+		List<Book> books = new ArrayList<>();
+		bookRepository.findByCategory(new Category(category)).forEach(books::add);
+		return books;
 	}
 	
 

@@ -16,5 +16,6 @@ public interface BookService {
 	List<Book> findByStatus(String status);
 	Integer countByStatus(String status);
 	Long count();
+	List<Book> findByCategory(String category);
 
 }

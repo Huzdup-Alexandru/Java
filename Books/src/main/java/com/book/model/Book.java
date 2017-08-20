@@ -2,20 +2,26 @@ package com.book.model;
 
 
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
-
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name="Book")
-public class Book {
+public class Book  {
+
 
 	@Id
 	private long isbn;
@@ -38,6 +44,10 @@ public class Book {
 	
 	@NotNull
 	private Pages pages;
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@JoinColumn(name="descriptionCategory")
+	private Category category;
 	
 	
 	
@@ -53,11 +63,16 @@ public class Book {
 		this.status = status;
 		this.description = description;
 		this.pages = pages;
+		
 	}
 	
-	
-	
 
+	public Category getCategory() {
+		return category;
+	}
+	public void setCategory(Category category) {
+		this.category = category;
+	}
 	public Description getDescription() {
 		return description;
 	}

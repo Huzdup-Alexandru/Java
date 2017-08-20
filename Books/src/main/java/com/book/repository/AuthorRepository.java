@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.book.model.Author;
 
-@Transactional
+
 @Repository
 public interface AuthorRepository extends JpaRepository<Author,String> {
 

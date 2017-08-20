@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.book.model.Author;
 import com.book.model.Book;
+import com.book.model.Category;
 import com.book.service.BookService;
 import com.book.service.BookServiceImpl;
 
@@ -35,11 +36,13 @@ public class BookController {
 
 	}
 
-	@RequestMapping(value = "/addBooks/{name}", method = RequestMethod.POST)
-	public void addBook(@RequestBody Book book, @PathVariable String name) {
+	@RequestMapping(value = "/addBooks/{name}/category/{category}", method = RequestMethod.POST)
+	public void addBook(@RequestBody Book book, @PathVariable String name,@PathVariable String category) {
+		Category category1 = new Category(category);
 		Author author = new Author();
 		author.setName(name);
 		book.setAuthorName(author);
+		book.setCategory(category1);
 		bookService.addBook(book);
 
 	}
@@ -73,5 +76,10 @@ public class BookController {
 	@RequestMapping(value = "/countAll", method = RequestMethod.GET)
 	public Long count(){
 		return bookService.count();
+	}
+	
+	@RequestMapping(value = "/findByCategory/{category}", method = RequestMethod.GET)
+	public List<Book> findByCategory(@PathVariable String category){
+		return bookService.findByCategory(category);
 	}
 }
